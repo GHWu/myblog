@@ -1,0 +1,53 @@
+﻿<% include header.ejs %>
+<div class="page-header">
+    <h2 align="center"><span style="font-size: 45px"><%= title %></span> <a href="#" style="color:white"class="label label-info"><%= label%></a><br/><small><%= time %></small></h2>
+</div>
+
+<div class="container">
+        <h3 style="white-space:pre-wrap" id="post"></h3>
+        <script type="text/javascript">
+            window.onload = function(){
+                //反转义
+                var temp = document.createElement("div");
+                temp.innerHTML = '<%= post %>';
+                var output = temp.innerText || temp.textContent;
+                temp = null;
+                document.getElementById('post').innerHTML=output;
+            };
+        </script>
+</div>
+
+<div class="page-header"></div>
+<form class="form-horizontal" method="post">
+    <div class="container">
+        <div class="form-group col-xs-12">
+            <input type = "hidden" name = "title" value ="<%= title %>">
+            <% if(user) {%>
+                <input type = "hidden" name = "username" value ="<%= user.name %>">
+            <% }else{ %>
+                <input type = "hidden" name = "username" value ="">
+            <% } %>
+            <label for="Account number" class="logintext">Comment</label>
+            <textarea class="form-control" name="comment" type="text" rows="5"></textarea>
+            <br/>
+            <div style = "text-align:right;">
+                <button type="submit" class="btn btn-default" id="push">Push</button>
+            </div>
+            <br/><br/>
+            <label for="all comment number" class="logintext">ALL Comment</label>
+        </div>
+    </div>
+</form>
+<% comments.forEach(function(comment,index){ %>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3><%= comment.user %>:<span style="display:block;float:right;text-align:right;color: gray;"><h4><%= comment.time %></h4></span></h3>
+                <h4 style="white-space:pre-wrap">            <%= comment.comment %></h4>
+            </div>
+        </div>
+    </div>
+<% }); %>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<% include footer.ejs %>

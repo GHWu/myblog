@@ -1,0 +1,54 @@
+﻿<% include header.ejs %>
+<div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="backstageH">Blogs</a></li>
+        <li role="presentation"><a href="backstageC">Comments</a></li>
+        <% if(user.name=='admin'){ %>
+        <li role="presentation"><a href="backstageU">Users</a></li>
+        <% } %>
+        <li role="presentation"><a href="backstageS">Setting</a></li>
+    </ul>
+</div>
+
+
+<div class="container">
+    <div class="page-header">
+        <h3>myBlog management</h3>
+    </div>
+</div>
+<% posts.forEach(function(post,index){
+%>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <a href="/article/<%= post.title %>"><h3><%= post.title %>  <span style="font-size: 50%"><a href="#" style="color:white"class="label label-info"><%= post.label%></a></span></h3></a>
+            <h4><%= post.time %></h4>
+        </div>
+        <div class="panel-footer">
+            <form class="form-horizontal" method="post">
+                <input type="hidden" name="delete-title" value="<%= post.title %>">
+                <button class="label label-warning" type="submit">Delete</button>
+                <a class="label label-warning" href="/modify?title=<%= post.title %>">Modify</a>
+            </form>
+        </div>
+    </div>
+</div>
+<% }) %>
+
+<div class="container">
+    <div class="page-header"></div>
+    <nav>
+        <ul class="pager">
+            <% if (!isFirstPage) { %>
+            <li><a class="btn" href="/backstageH?p=<%= page-1 %>">Last</a></li>
+            <% } %>
+            <% if (!isLastPage) { %>
+            <li><a class="btn" href="/backstageH?p=<%= page+1 %>">Next</a></li>
+            <% } %>
+        </ul>
+    </nav>
+</div>
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<% include footer.ejs %>

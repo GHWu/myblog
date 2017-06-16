@@ -1,0 +1,29 @@
+<% include header.ejs %>
+
+<div class="container">
+<% posts.forEach(function(post,index){%>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h1 align="center" style="font-family: STFangsong;font-size: 40px"><%= post.title %> <span style="font-size: 50%"><a href="#" style="color:white"class="label label-info"><%= post.label%></a></span></h3>
+            <h2 align="center" style="font-family: STXingkai"><%= post.introduce %></h2>
+            <center><a class="btn btn-default" href="/article/<%= post.title %>">View detail</a></center>
+        </div>
+    </div>
+<%})%>
+</div>
+
+<div class="container">
+    <nav>
+        <ul class="pager">
+            <% if (!isFirstPage) { %>
+                <li><a class="btn" href="/?p=<%= page-1 %>">Last</a></li>
+            <% } %>
+            <% if (!isLastPage) { %>
+                <li><a class="btn" href="/?p=<%= page+1 %>">Next</a></li>
+            <% } %>
+        </ul>
+    </nav>
+</div>
+
+<br/><br/>
+<% include footer.ejs %>

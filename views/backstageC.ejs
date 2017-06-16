@@ -1,0 +1,55 @@
+﻿<% include header.ejs %>
+<div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation"><a href="backstageH">Blogs</a></li>
+        <li role="presentation" class="active"><a href="backstageC">Comments</a></li>
+        <% if(user.name=='admin'){ %>
+        <li role="presentation"><a href="backstageU">Users</a></li>
+        <% } %>
+        <li role="presentation"><a href="backstageS">Setting</a></li>
+    </ul>
+</div>
+
+
+<div class="container">
+    <div class="page-header">
+        <h3>myComment management</h3>
+    </div>
+</div>
+<% comments.forEach(function(comment,index){
+%>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <a href="/article/<%= comment.title %>"><h3 align="center"><%= comment.title %></h3></a>
+            <h4>Username: <span style="color: darkred;"><%= comment.user %></span></h4>
+            <h4>Comment: <span style="color: darkgreen;"><%= comment.comment %></span></h4>
+        </div>
+        <div class="panel-footer">
+            <form class="form-horizontal" method="post">
+                <input type="hidden" name="delete-comment" value="<%= comment.comment %>">
+                <button class="label label-warning" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+<% }) %>
+
+<div class="container">
+    <div class="page-header"></div>
+    <nav>
+        <ul class="pager">
+            <% if (!isFirstPage) { %>
+            <li><a class="btn" href="/backstageC?p=<%= page-1 %>">Last</a></li>
+            <% } %>
+            <% if (!isLastPage) { %>
+            <li><a class="btn" href="/backstageC?p=<%= page+1 %>">Next</a></li>
+            <% } %>
+        </ul>
+    </nav>
+</div>
+
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<% include footer.ejs %>

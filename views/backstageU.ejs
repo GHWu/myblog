@@ -1,0 +1,42 @@
+﻿<% include header.ejs %>
+<div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation"><a href="backstageH">Blogs</a></li>
+        <li role="presentation"><a href="backstageC">Comments</a></li>
+        <% if(user.name=='admin'){ %>
+        <li role="presentation" class="active"><a href="backstageU">Users</a></li>
+        <% } %>
+        <li role="presentation"><a href="backstageS">Setting</a></li>
+    </ul>
+</div>
+
+
+<div class="container">
+    <div class="page-header">
+        <h3>Users management</h3>
+    </div>
+</div>
+<% users.forEach(function(user,index){
+%>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>username:    <span style="color: darkred;"><%= user.name %></span></h3>
+            <h4>email:    <span style="color: darkred;"><%= user.email %></h4>
+            <h4>register-time:    <span style="color: darkred;"><%= user.registertime %></h4>
+            <h4>Last-time:    <span style="color: darkred;"><%= user.lasttime %></h4>
+            <h4>state:    <span style="color: darkred;"><%= user.stateC %></h4>
+        </div>
+        <div class="panel-footer">
+            <form class="form-horizontal" method="post">
+                <input type="hidden" name="delete-user" value="<%= user.name %>">
+                <button class="label label-warning" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+<% }) %>
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<% include footer.ejs %>
